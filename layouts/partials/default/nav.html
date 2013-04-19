@@ -13,16 +13,18 @@
           Fredagsmoro
         <% end %>
       </a>
-      <!--
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Status <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posts <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href=""></a></li>
+              <% items.select{|i| i.attributes.has_key?(:fun)}.sort_by{|i| i[:title]}.reverse.each do |item| %>
+              <li><%= link_to item[:title], item.path %></li>
+              <% end %>
               <li><a href=""></a></li>
             </ul>
           </li>
+          <!--
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Development <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -35,9 +37,9 @@
           <li class="divider-vertical"></li>
               <li><a href=""></a></li>
               <li><a href=""></a></li>
+        -->
         </ul>
       </div>
-        -->
     </div>
   </div>
 </div>
