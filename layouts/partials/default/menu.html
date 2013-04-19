@@ -1,0 +1,7 @@
+<ul class="nav nav-list">
+  <li class="nav-header">Posts</li>
+  <% items.select{|i| i.attributes.has_key?(:fun)}.sort_by{|i| i[:title]}.reverse.each do |item| %>
+  <li><%= link_to item[:title], item.path %></li>
+  <% end %>
+</ul>
+

@@ -1,0 +1,43 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="/">
+        <% if @item.attributes.has_key?(:site_name) %>
+          <%= @item[:site_name]%>
+        <% else %>
+          Fredagsmoro
+        <% end %>
+      </a>
+      <!--
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Status <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href=""></a></li>
+              <li><a href=""></a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Development <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href=""></a></li>
+              <li><a href=""></a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <li class="divider-vertical"></li>
+              <li><a href=""></a></li>
+              <li><a href=""></a></li>
+        </ul>
+      </div>
+        -->
+    </div>
+  </div>
+</div>
