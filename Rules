@@ -13,6 +13,10 @@
 #   item, use the pattern "/about/*/"; "/about/*" will also select the parent,
 #   because "*" matches zero or more characters.
 
+preprocess do
+  @site.config[:funposts] = items.select{|i| i.attributes.has_key?(:fun)}.sort_by{|i| i[:title]}.reverse
+end
+
 compile '/assets/css/*' do
   filter :rainpress
 end

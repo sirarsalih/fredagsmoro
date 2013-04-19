@@ -10,6 +10,11 @@ fun: true
 
 <h1>#{ARGV[0]}</h1>
 
+<div class="well">
+  <%= prev_fun %>
+  <%= next_fun %>
+</div>
+
 <% @item.children.each do |i| %>
 <p><img src="<%= i.path %>"/></p>
 <% end %>
