@@ -1,0 +1,15 @@
+---
+title: 2012-08-17
+fun: true
+---
+
+<h1>2012-08-17</h1>
+
+<div class="well">
+  <%= prev_fun %>
+  <%= next_fun %>
+</div>
+
+<% @item.children.each do |i| %>
+<p><img src="<%= i.path %>"/></p>
+<% end %>

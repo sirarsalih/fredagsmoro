@@ -21,20 +21,29 @@ fun: true
 eot
 
 root = File.join(Dir::pwd, 'content', ARGV[0])
+erb = "#{root}.erb"
 
-File.open("#{root}.erb", 'w') { |file| file.write(output) }
-
-if File.directory?(ARGV[1])
-  FileUtils.mv ARGV[1], root
+if (!File.exists? erb)
+  File.open("#{root}.erb", 'w') { |file| file.write(output) }
+else
+  puts "Erb found: #{erb}"
 end
-  
-if File.file?(ARGV[1]) 
-  FileUtils.mkdir_p(root)
 
-  Zip::ZipFile.open(ARGV[1]) do |zip_file|
-    zip_file.each do |file|
-      destination = File.join(root, file.name)
-      zip_file.extract(file, destination) unless File.exist?(destination)
+if (!File.exists? root)
+  if File.directory?(ARGV[1])
+    FileUtils.mv ARGV[1], root
+  end
+  
+  if File.file?(ARGV[1]) 
+    FileUtils.mkdir_p(root)
+
+    Zip::ZipFile.open(ARGV[1]) do |zip_file|
+      zip_file.each do |file|
+        destination = File.join(root, file.name)
+        zip_file.extract(file, destination) unless File.exist?(destination)
+      end
     end
   end
+else
+  puts "Target found: #{erb}"
 end

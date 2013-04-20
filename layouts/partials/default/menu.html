@@ -3,5 +3,6 @@
   <% @site.config[:funposts].first(20).each do |item| %>
   <li><%= link_to item[:title], item.path %></li>
   <% end %>
+  <li>For older posts, see top menu</li>
 </ul>
 

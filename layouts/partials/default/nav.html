@@ -18,8 +18,22 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posts <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <% @site.config[:funposts].each do |item| %>
-              <li><%= link_to item[:title], item.path %></li>
+              <% split_fun_posts.each do |yr, months| %>
+              <li class="dropdown-submenu">
+                <a href="#"><%= yr %></a>
+                <ul class="dropdown-menu">
+                  <% months.each do |mn, posts| %>
+                  <li class="dropdown-submenu">
+                    <a href="#"><%= mn %></a>
+                    <ul class="dropdown-menu">
+                      <% posts.each do |dy, post| %>
+                      <li><%= link_to dy, post.path %></li>
+                      <% end %>
+                    </ul>
+                  </li>
+                  <% end %>
+                </ul>
+              </li>
               <% end %>
               <li><a href=""></a></li>
             </ul>
