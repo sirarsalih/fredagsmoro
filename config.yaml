@@ -84,4 +84,4 @@ deploy:
   www:
     options: [ '-rvz' ]
     kind: rsync
-    dst:  "menavaur.chrissearle.org:/srv/www/fredagsmoro.chrissearle.org/htdocs"
+    dst:  "bryanek.chrissearle.org:/srv/www/fredagsmoro.chrissearle.org/htdocs"
