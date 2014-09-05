@@ -19,7 +19,7 @@ app.controller('AppController', ['$scope', 'dataFactory', function ($scope, data
     });
 
     $scope.load = function(year, month, day, files) {
-        $scope.title = year + "-" + month + "-" + day;
+        $scope.title = moment(year + "-" + month + "-" + day).format("LL");
         $scope.files = files;
 
     };
