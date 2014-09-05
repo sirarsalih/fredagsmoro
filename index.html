@@ -24,6 +24,8 @@
                 <div ng-repeat="file in files | orderBy:file">
                     <p>
                         <img ng-src="{{ file.src }}"/>
+                        <br/>
+                        <a class="permalink" target="_blank" href="{{ file.src }}">image link</a>
                     </p>
                 </div>
                 <p>{{ author }}</p>

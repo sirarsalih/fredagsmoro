@@ -14,3 +14,7 @@ body {
     margin-bottom: 0;
     color: #777;
 }
+
+.permalink {
+    font-size: 0.6em;
+}
