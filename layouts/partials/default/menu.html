@@ -1,8 +1,0 @@
-<ul class="nav nav-list">
-  <li class="nav-header">Posts</li>
-  <% @site.config[:funposts].first(8).each do |item| %>
-  <li><%= link_to item[:title], item.path %></li>
-  <% end %>
-  <li>For older posts, see top menu</li>
-</ul>
-
