@@ -1,6 +1,7 @@
 <div ng-controller="ShowController as sc">
     <h1>{{ sc.title }}</h1>
 
+    <p><a ng-href="#/{{ sc.year }}/{{ sc.month }}/{{ sc.day }}">View as list</a></p>
     <div>
         <carousel interval="sc.slideInterval">
             <slide ng-repeat="file in sc.files | orderBy:'src'">
@@ -12,5 +13,4 @@
             </slide>
         </carousel>
     </div>
-    <p><a ng-href="#/{{ sc.year }}/{{ sc.month }}/{{ sc.day }}">View as list</a></p>
 </div>
