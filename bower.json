@@ -1,0 +1,23 @@
+{
+  "name": "fredagsmoro",
+  "version": "0.0.1",
+  "authors": [
+    "Chris Searle <chris@chrissearle.org>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "http://fredagsmoro.chrissearle.org",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "~1.2.25",
+    "angularjs": "~1.2.25",
+    "bootstrap": "~3.2.0",
+    "moment": "~2.8.3"
+  }
+}

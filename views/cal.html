@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ title }}</h3>
+    </div>
+    <table class="table">
+        <tr ng-repeat="month in months | orderBy:'-name'">
+            <th>{{ month.name }}</th>
+            <td ng-repeat="day in month.days | orderBy:'toString()'">
+                <a ng-href="#/{{ year.name }}/{{ month.name }}/{{ day.name }}">{{ day.name }}</a>
+            </td>
+        </tr>
+    </table>
+</div>
