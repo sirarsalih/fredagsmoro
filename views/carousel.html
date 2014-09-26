@@ -1,0 +1,16 @@
+<div ng-controller="ShowController as sc">
+    <h1>{{ sc.title }}</h1>
+
+    <div>
+        <carousel interval="sc.slideInterval">
+            <slide ng-repeat="file in sc.files | orderBy:'src'">
+                <img ng-src="{{file.src}}" style="margin:auto;">
+
+                <div class="carousel-caption">
+                    <p><a class="permalink" target="_blank" href="{{ file.src }}">image link</a></p>
+                </div>
+            </slide>
+        </carousel>
+    </div>
+    <p><a ng-href="#/{{ sc.year }}/{{ sc.month }}/{{ sc.day }}">View as list</a></p>
+</div>

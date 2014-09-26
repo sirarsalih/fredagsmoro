@@ -1,10 +1,12 @@
-var app = angular.module('FDM', ['ngRoute']);
+var app = angular.module('FDM', ['ngRoute' ,'ui.bootstrap']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/front.html'
     }).when('/:year/:month/:day', {
         templateUrl: 'views/show.html'
+    }).when('/slide/:year/:month/:day', {
+        templateUrl: 'views/carousel.html'
     }).otherwise({redirectTo: '/'});
 }]);
 
@@ -101,6 +103,12 @@ app.controller('ShowController', ['$routeParams', 'dataFactory', function ($rout
     var self = this;
 
     self.title = moment($routeParams.year + "-" + $routeParams.month + "-" + $routeParams.day).format("LL");
+
+    self.year = $routeParams.year;
+    self.month = $routeParams.month;
+    self.day = $routeParams.day;
+
+    self.slideInterval = 3000;
 
     dataFactory.filesForYearMonthDay($routeParams.year, $routeParams.month, $routeParams.day, function (files) {
         self.files = files;

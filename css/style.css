@@ -17,4 +17,11 @@ body {
 
 .permalink {
     font-size: 0.6em;
+    color: white;
+    text-decoration: none;
+}
+
+.permalink a, .permalink a:link, .permalink a:visited, .permalink a:focus, .permalink a:active   {
+    color: white;
+    text-decoration: none;
 }
