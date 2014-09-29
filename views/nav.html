@@ -9,5 +9,11 @@
             </button>
             <a class="navbar-brand" href="#/"">Fredagsmoro</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <p class="navbar-text">Latest:</p>
+            <ul class="nav navbar-nav">
+                <li><a ng-href="#/slide/{{ ac.latest.year }}/{{ ac.latest.month }}/{{ ac.latest.day }}">{{ ac.latest.title }}</a></li>
+            </ul>
+        </div>
     </div>
 </nav>

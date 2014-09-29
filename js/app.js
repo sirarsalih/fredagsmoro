@@ -70,6 +70,27 @@ app.factory('dataFactory', ['$http', function ($http) {
 
                 callback(dayTree[0].tree);
             });
+        },
+        latest: function(callback) {
+            var sortNameReverse = function(a, b) {
+                if (a.name < b.name) {
+                    return 1;
+                }
+                if (a.name > b.name) {
+                    return -1;
+                }
+                return 0;
+            };
+
+            getData(function(data) {
+                var year = data.sort(sortNameReverse)[0];
+
+                var month = year.tree.sort(sortNameReverse)[0];
+
+                var day = month.tree.sort(sortNameReverse)[0];
+
+                callback(year.name, month.name, day.name);
+            });
         }
     };
 }]);
@@ -97,12 +118,21 @@ app.controller('AppController', ['dataFactory', function (dataFactory) {
     dataFactory.years(function (years) {
         self.years = years;
     });
+
+    dataFactory.latest(function(year, month, day) {
+        self.latest = {
+            'year': year,
+            'month': month,
+            'day': day,
+            'title': moment(year + "-" + month + "-" + day, "YYYY-MM-DD hh:mm:ss").format("LL")
+        };
+    });
 }]);
 
 app.controller('ShowController', ['$routeParams', 'dataFactory', function ($routeParams, dataFactory) {
     var self = this;
 
-    self.title = moment($routeParams.year + "-" + $routeParams.month + "-" + $routeParams.day).format("LL");
+    self.title = moment($routeParams.year + "-" + $routeParams.month + "-" + $routeParams.day, "YYYY-MM-DD hh:mm:ss").format("LL");
 
     self.year = $routeParams.year;
     self.month = $routeParams.month;
