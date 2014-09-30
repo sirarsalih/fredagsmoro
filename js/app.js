@@ -1,4 +1,4 @@
-var app = angular.module('FDM', ['ngRoute' ,'ui.bootstrap']);
+var app = angular.module('FDM', ['ngRoute' , 'ui.bootstrap']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
@@ -55,24 +55,18 @@ app.factory('dataFactory', ['$http', function ($http) {
             });
         },
         filesForYearMonthDay: function (year, month, day, callback) {
+            function filterTree(tree, match) {
+                return tree.filter(function (candidate) {
+                    return candidate.name == match;
+                })[0].tree;
+            }
+
             getData(function (data) {
-                var yearTree = data.filter(function (candidate) {
-                    return candidate.name == year;
-                })[0].tree;
-
-                var monthTree = yearTree.filter(function (candidate) {
-                    return candidate.name == month;
-                })[0].tree;
-
-                var dayTree = monthTree.filter(function (candidate) {
-                    return candidate.name == day;
-                });
-
-                callback(dayTree[0].tree);
+                callback(filterTree(filterTree(filterTree(data, year), month), day));
             });
         },
-        latest: function(callback) {
-            var sortNameReverse = function(a, b) {
+        latest: function (callback) {
+            var sortNameReverse = function (a, b) {
                 if (a.name < b.name) {
                     return 1;
                 }
@@ -82,7 +76,7 @@ app.factory('dataFactory', ['$http', function ($http) {
                 return 0;
             };
 
-            getData(function(data) {
+            getData(function (data) {
                 var year = data.sort(sortNameReverse)[0];
 
                 var month = year.tree.sort(sortNameReverse)[0];
@@ -119,7 +113,7 @@ app.controller('AppController', ['dataFactory', function (dataFactory) {
         self.years = years;
     });
 
-    dataFactory.latest(function(year, month, day) {
+    dataFactory.latest(function (year, month, day) {
         self.latest = {
             'year': year,
             'month': month,
