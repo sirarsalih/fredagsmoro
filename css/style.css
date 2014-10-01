@@ -17,11 +17,18 @@ body {
 
 .permalink {
     font-size: 0.6em;
-    color: white;
     text-decoration: none;
 }
 
-.permalink a, .permalink a:link, .permalink a:visited, .permalink a:focus, .permalink a:active   {
+.carousel-caption .permalink {
+    color: white;
+}
+
+.carousel-caption .permalink a,
+.carousel-caption .permalink a:link,
+.carousel-caption .permalink a:visited,
+.carousel-caption .permalink a:focus,
+.carousel-caption .permalink a:active   {
     color: white;
     text-decoration: none;
 }
