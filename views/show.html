@@ -1,13 +1,15 @@
 <div ng-controller="ShowController as sc">
-    <h1>{{ sc.title }}</h1>
+    <div class="btn-group">
+        <a class="btn btn-primary" ng-href="#/slide/{{ sc.year }}/{{ sc.month }}/{{ sc.day }}">View as slideshow</a>
+    </div>
 
-    <p><a ng-href="#/slide/{{ sc.year }}/{{ sc.month }}/{{ sc.day }}">View as slideshow</a></p>
+    <h1>{{ sc.title }}</h1>
 
     <div ng-repeat="file in sc.files | orderBy:'src'">
         <p>
             <img ng-src="{{ file.src }}"/>
             <br/>
-            <a class="permalink" target="_blank" href="{{ file.src }}">image link</a>
+            <a class="btn btn-xs btn-primary" target="_blank" href="{{ file.src }}">direct image link</a>
         </p>
     </div>
 </div>

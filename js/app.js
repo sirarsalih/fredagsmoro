@@ -137,5 +137,9 @@ app.controller('ShowController', ['$routeParams', 'dataFactory', function ($rout
     dataFactory.filesForYearMonthDay($routeParams.year, $routeParams.month, $routeParams.day, function (files) {
         self.files = files;
     });
+
+    self.setSpeed = function(speed) {
+        self.slideInterval = speed;
+    }
 }]);
 
