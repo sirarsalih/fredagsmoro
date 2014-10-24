@@ -5,11 +5,12 @@
 
     <h1>{{ sc.title }}</h1>
 
-    <div ng-repeat="file in sc.files | orderBy:'src'">
-        <p>
+    <div class="panel panel-default" ng-repeat="file in sc.files | orderBy:'src'">
+        <div class="panel-body">
             <img ng-src="{{ file.src }}"/>
-            <br/>
+        </div>
+        <div class="panel-footer">
             <a class="btn btn-xs btn-primary" target="_blank" href="{{ file.src }}">direct image link</a>
-        </p>
+        </div>
     </div>
 </div>
