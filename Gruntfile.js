@@ -74,7 +74,11 @@ module.exports = function (grunt) {
             }
         },
         gitpush: {
-            newweek: {}
+            newweek: {
+                options: {
+                    remote: "github"
+                }
+            }
         }
     });
 
