@@ -8,25 +8,34 @@ A collection of random images from the net - collected by Ragnar Bergvik and sen
 
 ## Installation
 
-### Web components
- 
-    bower install
+### Prerequisites
 
-### Data file
+* npm
+* a fairly recent ruby
 
-    cd scripts
-    bundle
-    bundle exec ./build_data.rb > ../data.json
+### Installation
 
-### Sync
+Run:
 
-    cd scripts
-    ./sync.sh
+    npm install
+    grunt install
 
-This one won't work unless you have the keys :)
+### Grunt commands
 
-### Run locally
+#### Utils
 
-    scripts/localweb.sh
+* grunt install - run both bower and npm install
+* grunt (or grunt eslint) - run eslint
+* grunt exec:serve - run a local web on port 8000
 
-Runs python's simple http server on port 8000
+#### For a new week
+
+* grunt newweek - rebuild data.json, commit and push to github
+* grunt deploy - build and sync
+* grunt doit - newweek then deploy
+
+So - to generate a new week in its simplest form - add the images to the right content dir then run
+
+    grunt doit
+
+Sync of course requires that you have the correct ssh keys :)
