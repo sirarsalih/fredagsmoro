@@ -69,7 +69,7 @@ module.exports = function (grunt) {
         gitcommit: {
             newweek: {
                 options: {
-                    message: 'Test'
+                    message: 'New Week'
                 }
             }
         },
@@ -95,4 +95,5 @@ module.exports = function (grunt) {
     grunt.registerTask("default", ["eslint"]);
     grunt.registerTask("newweek", ["exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
     grunt.registerTask("deploy", ["rsync:build", "rsync:prod"]);
+    grunt.registerTask("doit", ["newweek", "deploy"]);
 };
