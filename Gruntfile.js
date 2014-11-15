@@ -72,7 +72,7 @@ module.exports = function (grunt) {
         gitcommit: {
             newweek: {
                 options: {
-                    message: 'New Week'
+                    message: "New Week"
                 }
             }
         },
@@ -91,8 +91,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-eslint");
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-rsync");
-    grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-git');
+    grunt.loadNpmTasks("grunt-exec");
+    grunt.loadNpmTasks("grunt-git");
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
