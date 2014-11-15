@@ -58,6 +58,20 @@ module.exports = function (grunt) {
                 cwd: "scripts",
                 command: "./build_data.rb > ../data.json"
             }
+        },
+        gitadd: {
+            newweek: {
+                options: {
+                    all: true
+                }
+            }
+        },
+        gitcommit: {
+            newweek: {
+                options: {
+                    message: 'Test'
+                }
+            }
         }
     });
 
@@ -72,6 +86,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
-    grunt.registerTask("newweek", ["exec:data"]);
+    grunt.registerTask("newweek", ["exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
     grunt.registerTask("deploy", ["rsync:build", "rsync:prod"]);
 };
