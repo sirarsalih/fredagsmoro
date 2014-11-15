@@ -72,6 +72,9 @@ module.exports = function (grunt) {
                     message: 'Test'
                 }
             }
+        },
+        gitpush: {
+            newweek: {}
         }
     });
 
