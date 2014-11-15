@@ -57,6 +57,9 @@ module.exports = function (grunt) {
             data: {
                 cwd: "scripts",
                 command: "./build_data.rb > ../data.json"
+            },
+            serve: {
+                command: "python -m SimpleHTTPServer 8000"
             }
         },
         gitadd: {
