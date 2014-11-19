@@ -3,3 +3,4 @@ output
 lib
 node_modules
 build
+config.yml

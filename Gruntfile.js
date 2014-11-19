@@ -55,11 +55,13 @@ module.exports = function (grunt) {
         },
         exec: {
             data: {
-                cwd: "scripts",
-                command: "./build_data.rb > ../data.json"
+                command: "scripts/build_data.rb > data.json"
             },
             serve: {
                 command: "python -m SimpleHTTPServer 8000"
+            },
+            fetch: {
+                command: 'scripts/fetch.rb'
             }
         },
         gitadd: {
@@ -96,7 +98,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
-    grunt.registerTask("newweek", ["exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
+    grunt.registerTask("newweek", ["exec:fetch", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
     grunt.registerTask("deploy", ["rsync:build", "rsync:prod"]);
     grunt.registerTask("doit", ["newweek", "deploy"]);
 };
