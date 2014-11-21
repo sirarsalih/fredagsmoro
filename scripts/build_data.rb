@@ -53,7 +53,8 @@ def build_year(year)
   data
 end
 
-Dir.chdir("../content")
+
+Dir.chdir("#{File.dirname(File.expand_path(__FILE__))}/../content")
 
 result = Dir.glob('*').inject([]){|memo, year| memo << build_year(year); memo}
 
