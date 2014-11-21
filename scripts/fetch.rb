@@ -8,10 +8,6 @@ require 'yaml'
 
 config = YAML::load(File.open(File.dirname(File.expand_path(__FILE__)) + '/config.yml'))
 
-puts config
-
-exit
-
 imap = Net::IMAP.new(config[:host], config[:port], usessl = true, certs = nil, verify = false)
 imap.login(config[:user], config[:pass])
 
