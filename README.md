@@ -1,6 +1,6 @@
 # Fredagsmoro
 
-A collection of random images from the net - collected by Karl Øgaard (previoiusly Ragnar Bergvik) and sent out each Friday to amuse their colleagues.
+A collection of random images from the net - collected by Karl Øgaard (previously Ragnar Bergvik) and sent out each Friday to amuse their colleagues.
 
 ## Live Site
 
