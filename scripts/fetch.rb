@@ -6,6 +6,7 @@ require 'fileutils'
 require 'base64'
 require 'yaml'
 
+
 config = YAML::load(File.open(File.dirname(File.expand_path(__FILE__)) + '/config.yml'))
 
 imap = Net::IMAP.new(config[:host], config[:port], usessl = true, certs = nil, verify = false)
@@ -37,6 +38,8 @@ imap.search(['ALL']).each do |message_id|
 
     imap.copy(message_id, "INBOX/Fredagsmoro/Done")
     imap.store(message_id, "+FLAGS", [:Deleted])
+    
+    system("$PWD/scripts/resize.sh #{datepath}")
 end
 
 imap.expunge
