@@ -32,3 +32,11 @@ body {
     color: white;
     text-decoration: none;
 }
+
+.jumbotron table {
+  margin-top: 50px;
+}
+
+.jumbotron table img {
+  width: 50px;
+}
