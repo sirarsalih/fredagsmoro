@@ -95,6 +95,13 @@ module.exports = function (grunt) {
                 }
             }
         },
+        gitpull: {
+            update: {
+                options: {
+                    remote: "origin"
+                }
+            }
+        },
         gitpush: {
             newweek: {
                 options: {
@@ -116,7 +123,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
-    grunt.registerTask("newweek", ["exec:fetch", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
+    grunt.registerTask("newweek", ["gitpull:update", "exec:fetch", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
     grunt.registerTask("deploy", ["rsync:build", "rsync:prod"]);
     grunt.registerTask("package", ["shell:git-commit", "rsync:build", "exec:dockersha", "exec:docker"]);
     grunt.registerTask("doit", ["newweek", "package"]);
