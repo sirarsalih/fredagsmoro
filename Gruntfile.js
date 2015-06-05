@@ -4,6 +4,17 @@ module.exports = function (grunt) {
     "use strict";
 
     grunt.initConfig({
+        shell: {
+            "git-commit": {
+                command: 'git rev-parse --short HEAD',
+                options: {
+                  callback: function (err, stdout, stderr, cb) {
+                      grunt.config.set('gitCommit', stdout.replace('\n', ''));
+                      cb();
+                  }
+              }
+          }
+        },
         eslint: {
             target: [
                 "Gruntfile.js",
@@ -62,6 +73,12 @@ module.exports = function (grunt) {
             },
             fetch: {
                 command: 'scripts/fetch.rb'
+            },
+            dockersha: {
+                command: 'docker build -t chris/fredagsmoro_cso:' + grunt.config.get('gitCommit') + ' .'
+            },
+            docker: {
+                command: 'docker build -t chris/fredagsmoro_cso:latest .'
             }
         },
         gitadd: {
@@ -95,10 +112,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-rsync");
     grunt.loadNpmTasks("grunt-exec");
     grunt.loadNpmTasks("grunt-git");
+    grunt.loadNpmTasks("grunt-shell");
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
     grunt.registerTask("newweek", ["exec:fetch", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
     grunt.registerTask("deploy", ["rsync:build", "rsync:prod"]);
-    grunt.registerTask("doit", ["newweek", "deploy"]);
+    grunt.registerTask("package", ["shell:git-commit", "rsync:build", "exec:dockersha", "exec:docker"]);
+    grunt.registerTask("doit", ["newweek", "package"]);
 };
