@@ -4,17 +4,7 @@ module.exports = function (grunt) {
     "use strict";
 
     grunt.initConfig({
-        shell: {
-            "git-commit": {
-                command: 'git rev-parse --short HEAD',
-                options: {
-                  callback: function (err, stdout, stderr, cb) {
-                      grunt.config.set('gitCommit', stdout.replace('\n', ''));
-                      cb();
-                  }
-              }
-          }
-        },
+        gitinfo: {},
         eslint: {
             target: [
                 "Gruntfile.js",
@@ -75,10 +65,16 @@ module.exports = function (grunt) {
                 command: 'scripts/fetch.rb'
             },
             dockersha: {
-                command: 'docker build -t chris/fredagsmoro_cso:' + grunt.config.get('gitCommit') + ' .'
+                command: 'docker build -t docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> .'
             },
             docker: {
-                command: 'docker build -t chris/fredagsmoro_cso:latest .'
+                command: 'docker tag docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
+            },
+            deploydockersha: {
+                command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %>'
+            },
+            deploydocker: {
+                command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
             }
         },
         gitadd: {
@@ -119,12 +115,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-rsync");
     grunt.loadNpmTasks("grunt-exec");
     grunt.loadNpmTasks("grunt-git");
-    grunt.loadNpmTasks("grunt-shell");
+    grunt.loadNpmTasks('grunt-gitinfo');
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
     grunt.registerTask("newweek", ["gitpull:update", "exec:fetch", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
     grunt.registerTask("deploy", ["rsync:build", "rsync:prod"]);
-    grunt.registerTask("package", ["shell:git-commit", "rsync:build", "exec:dockersha", "exec:docker"]);
-    grunt.registerTask("doit", ["newweek", "package"]);
+    grunt.registerTask("package", ["gitinfo", "rsync:build", "exec:dockersha", "exec:docker"]);
+    grunt.registerTask("dockerdeploy", ["gitinfo", "exec:deploydockersha", "exec:deploydocker"]);
+    grunt.registerTask("doit", ["newweek", "package", "dockerdeploy"]);
 };
