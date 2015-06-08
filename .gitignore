@@ -2,5 +2,5 @@ tmp
 output
 lib
 node_modules
-build
+build/site
 config.yml

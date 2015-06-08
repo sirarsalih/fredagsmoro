@@ -41,7 +41,7 @@ module.exports = function (grunt) {
             build: {
                 options: {
                     src: "./",
-                    dest: "./build",
+                    dest: "./build/site",
                     delete: true
                 }
             },
@@ -65,15 +65,19 @@ module.exports = function (grunt) {
                 command: 'scripts/fetch.rb'
             },
             dockersha: {
+                cwd: 'build',
                 command: 'docker build -t docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> .'
             },
             docker: {
+                cwd: 'build',
                 command: 'docker tag -f docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
             },
             deploydockersha: {
+                cwd: 'build',
                 command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %>'
             },
             deploydocker: {
+                cwd: 'build',
                 command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
             }
         },
