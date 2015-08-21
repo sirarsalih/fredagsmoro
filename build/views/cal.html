@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ title }}</h3>
+    </div>
+    <table class="table">
+        <tr ng-repeat="month in months | orderBy:'-name'">
+            <th>{{ month.name }}</th>
+            <td ng-repeat="day in month.days | orderBy:'toString()'">
+                <a ng-href="#/slide/{{ year.name }}/{{ month.name }}/{{ day.name }}">{{ day.name }}</a>
+            </td>
+            <td ng-show="month.days.length <= 4"></td>
+            <td ng-show="month.days.length <= 3"></td>
+            <td ng-show="month.days.length <= 2"></td>
+            <td ng-show="month.days.length <= 1"></td>
+        </tr>
+    </table>
+</div>
