@@ -1,9 +1,10 @@
 <div class="jumbotron">
   <h1>Fredagsmoro</h1>
 
-  <h3>Latest: <a ng-href="#/slide/{{ ac.latest.year }}/{{ ac.latest.month }}/{{ ac.latest.day }}">{{ ac.latest.title }}</a></h3>
+  <h3>Latest: <a ng-href="#/{{ ac.latest.year }}/{{ ac.latest.month }}/{{ ac.latest.day }}">{{ ac.latest.title }}</a></h3>
 
-  
+  <h4>Archive: <a ng-href="#/archive">Browse by date</a></h4>
+
   <table class="table table-condensed">
     <thead>
       <tr>

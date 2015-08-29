@@ -4,9 +4,13 @@
     </div>
     <table class="table">
         <tr ng-repeat="month in months | orderBy:'-name'">
-            <th>{{ month.name }}</th>
+            <th>{{ month.displayName }}</th>
             <td ng-repeat="day in month.days | orderBy:'toString()'">
-                <a ng-href="#/slide/{{ year.name }}/{{ month.name }}/{{ day.name }}">{{ day.name }}</a>
+                <a ng-href="#/{{ year.name }}/{{ month.name }}/{{ day.name }}">{{ day.displayName }}</a>
+                -
+                <span class="badge">
+                  {{ day.count }} images
+                </span>
             </td>
             <td ng-show="month.days.length <= 4"></td>
             <td ng-show="month.days.length <= 3"></td>

@@ -11,5 +11,7 @@ app.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "views/show.html"
     }).when("/slide/:year/:month/:day", {
         templateUrl: "views/carousel.html"
+    }).when("/archive", {
+        templateUrl: "views/archive.html"
     }).otherwise({redirectTo: "/"});
 }]);

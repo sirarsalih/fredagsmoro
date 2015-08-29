@@ -32,12 +32,19 @@ app.factory("dataFactory", ["$http", function ($http) {
                 angular.forEach(data.filter(function (candidate) {
                     return candidate.name === year;
                 })[0].tree, function (month) {
-                    var result = { "name": month.name };
+                    var result = {
+                        "name": month.name,
+                        "displayName": moment().year(year).month(parseInt(month.name) - 1).format("MMM")
+                    };
 
                     var days = [];
 
                     angular.forEach(month.tree, function (day) {
-                        this.push({ "name": day.name });
+                        this.push({
+                            "name": day.name,
+                            "displayName": moment().year(year).month(parseInt(month.name) - 1).date(parseInt(day.name)).format("Do"),
+                            "count": day.tree.length
+                        });
                     }, days);
 
                     result.days = days;

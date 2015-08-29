@@ -12,7 +12,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <p class="navbar-text">Latest:</p>
             <ul class="nav navbar-nav">
-                <li><a ng-href="#/slide/{{ ac.latest.year }}/{{ ac.latest.month }}/{{ ac.latest.day }}">{{ ac.latest.title }}</a></li>
+                <li><a ng-href="#/{{ ac.latest.year }}/{{ ac.latest.month }}/{{ ac.latest.day }}">{{ ac.latest.title }}</a></li>
+            </ul>
+            <p class="navbar-text">Archive:</p>
+            <ul class="nav navbar-nav">
+                <li><a ng-href="#/archive">Browse by date</a></li>
             </ul>
         </div>
     </div>
