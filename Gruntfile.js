@@ -4,11 +4,10 @@ module.exports = function (grunt) {
     "use strict";
 
     grunt.initConfig({
-        gitinfo: {},
         eslint: {
             target: [
                 "Gruntfile.js",
-                "js/*.js",
+                "site/js/*.js",
                 "test/**/*Spec.js"
             ]
         },
@@ -18,67 +17,19 @@ module.exports = function (grunt) {
                     color: true,
                     production: false,
                     cwd: ".",
-                    directory: "lib"
-                }
-            }
-        },
-        karma: {
-            app: {
-                configFile: "test/config/karma.conf.js"
-            },
-            "app-fast": {
-                browsers: ["PhantomJS"],
-                singleRun: true,
-                configFile: "test/config/karma.conf.js"
-            }
-        },
-        rsync: {
-            options: {
-                args: ["--verbose"],
-                exclude: [".git*", ".idea", "node_modules", "package.json", "*.log", ".DS_Store", "scripts", "build", "Gruntfile.js", "README.md", "bower.json", "test"],
-                recursive: true
-            },
-            build: {
-                options: {
-                    src: "./",
-                    dest: "./build/site",
-                    delete: true
-                }
-            },
-            prod: {
-                options: {
-                    src: "./build/",
-                    dest: "/srv/www/fredagsmoro.chrissearle.org/htdocs",
-                    host: "bryanek.chrissearle.org",
-                    delete: true
+                    directory: "site/lib"
                 }
             }
         },
         exec: {
             data: {
-                command: "scripts/build_data.rb > data.json"
+                command: "scripts/build_data.rb > site/data.json"
             },
             serve: {
-                command: "python -m SimpleHTTPServer 8000"
+                command: "node server.js"
             },
             fetch: {
-                command: 'scripts/fetch.rb'
-            },
-            dockersha: {
-                cwd: 'build',
-                command: 'docker build -t docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> .'
-            },
-            docker: {
-                cwd: 'build',
-                command: 'docker tag -f docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
-            },
-            deploydockersha: {
-                cwd: 'build',
-                command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %>'
-            },
-            deploydocker: {
-                cwd: 'build',
-                command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
+                command: "scripts/fetch.rb"
             }
         },
         gitadd: {
@@ -115,17 +66,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-npm-install");
     grunt.loadNpmTasks("grunt-bower-install-simple");
     grunt.loadNpmTasks("grunt-eslint");
-    grunt.loadNpmTasks("grunt-karma");
-    grunt.loadNpmTasks("grunt-rsync");
     grunt.loadNpmTasks("grunt-exec");
     grunt.loadNpmTasks("grunt-git");
-    grunt.loadNpmTasks('grunt-gitinfo');
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
     grunt.registerTask("newweek", ["gitpull:update", "exec:fetch", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
-    grunt.registerTask("deploy", ["rsync:build", "rsync:prod"]);
-    grunt.registerTask("package", ["gitinfo", "rsync:build", "exec:dockersha", "exec:docker"]);
-    grunt.registerTask("dockerdeploy", ["gitinfo", "exec:deploydockersha", "exec:deploydocker"]);
-    grunt.registerTask("doit", ["newweek", "package", "dockerdeploy"]);
+    grunt.registerTask("doit", ["newweek"]);
+    grunt.registerTask("serve", ["exec:serve"]);
 };

@@ -23,7 +23,7 @@ imap.search(['ALL']).each do |message_id|
     
     date = DateTime.parse(msg.attr['ENVELOPE']['date'])
 
-    datepath = "content/#{'%04d' % date.year}/#{'%02d' % date.mon}/#{'%02d' % date.mday}"
+    datepath = "site/content/#{'%04d' % date.year}/#{'%02d' % date.mon}/#{'%02d' % date.mday}"
     FileUtils.mkpath datepath
     
     body = msg.attr["BODY"]
