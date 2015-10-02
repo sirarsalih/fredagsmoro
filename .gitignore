@@ -1,7 +1,5 @@
-tmp
-output
 lib
 node_modules
-build/site
+build
 config.yml
 dropbox.yml
