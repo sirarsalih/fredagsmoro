@@ -64,20 +64,20 @@ module.exports = function (grunt) {
             }
         },
         dockersha: {
-            cwd: 'build',
-            command: 'docker build -t docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> .'
+            cwd: "build",
+            command: "docker build -t docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> ."
         },
         docker: {
-            cwd: 'build',
-            command: 'docker tag -f docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
+            cwd: "build",
+            command: "docker tag -f docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> docker.home.chrissearle.org:5000/fredagsmoro_cso:latest"
         },
         deploydockersha: {
-            cwd: 'build',
-            command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %>'
+            cwd: "build",
+            command: "docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %>"
         },
         deploydocker: {
-            cwd: 'build',
-            command: 'docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:latest'
+            cwd: "build",
+            command: "docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:latest"
         }
     });
 
@@ -87,10 +87,17 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-eslint");
     grunt.loadNpmTasks("grunt-exec");
     grunt.loadNpmTasks("grunt-git");
+    grunt.loadNpmTasks("grunt-gitinfo");
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
+
     grunt.registerTask("newweek", ["gitpull:update", "exec:dropbox", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
+
     grunt.registerTask("doit", ["newweek"]);
+
+    grunt.registerTask("docker:package", ["gitinfo", "exec:dockersha", "exec:docker"]);
+    grunt.registerTask("docker:deploy", ["gitinfo", "exec:deploydockersha", "exec:deploydocker"]);
+
     grunt.registerTask("serve", ["exec:serve"]);
 };
