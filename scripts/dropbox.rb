@@ -11,7 +11,7 @@ config = YAML::load(File.open(File.dirname(File.expand_path(__FILE__)) + '/dropb
 path = config[:path]
 
 date = DateTime.now
-datepath = "site/content/#{'%04d' % date.year}/#{'%02d' % date.mon}/#{'%02d' % date.mday}"
+datepath = "build/site/content/#{'%04d' % date.year}/#{'%02d' % date.mon}/#{'%02d' % date.mday}"
 FileUtils.mkpath datepath
 
 Dir.foreach(path) do |item|
