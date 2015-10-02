@@ -30,6 +30,9 @@ module.exports = function (grunt) {
             },
             fetch: {
                 command: "scripts/fetch.rb"
+            },
+            dropbox: {
+                command: "scripts/dropbox.rb"
             }
         },
         gitadd: {
@@ -71,7 +74,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("install", ["bower-install-simple:app", "npm-install"]);
     grunt.registerTask("default", ["eslint"]);
-    grunt.registerTask("newweek", ["gitpull:update", "exec:fetch", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
+    grunt.registerTask("newweek", ["gitpull:update", "exec:dropbox", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
     grunt.registerTask("doit", ["newweek"]);
     grunt.registerTask("serve", ["exec:serve"]);
 };
