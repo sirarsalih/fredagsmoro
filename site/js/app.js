@@ -1,6 +1,6 @@
 /* global angular */
 
-var app = angular.module("FDM", ["ngRoute" , "ui.bootstrap"]);
+var app = angular.module("FDM", ["ngRoute" , "ui.bootstrap", "angulartics", "angulartics.google.analytics"]);
 
 app.config(["$routeProvider", function ($routeProvider) {
     "use strict";
