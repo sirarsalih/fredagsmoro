@@ -33,6 +33,22 @@ module.exports = function (grunt) {
             },
             dropbox: {
                 command: "scripts/dropbox.rb"
+            },
+            dockersha: {
+                cwd: "build",
+                command: "docker build -t docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> ."
+            },
+            docker: {
+                cwd: "build",
+                command: "docker tag -f docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> docker.home.chrissearle.org:5000/fredagsmoro_cso:latest"
+            },
+            deploydockersha: {
+                cwd: "build",
+                command: "docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %>"
+            },
+            deploydocker: {
+                cwd: "build",
+                command: "docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:latest"
             }
         },
         gitadd: {
@@ -62,22 +78,6 @@ module.exports = function (grunt) {
                     remote: "origin"
                 }
             }
-        },
-        dockersha: {
-            cwd: "build",
-            command: "docker build -t docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> ."
-        },
-        docker: {
-            cwd: "build",
-            command: "docker tag -f docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %> docker.home.chrissearle.org:5000/fredagsmoro_cso:latest"
-        },
-        deploydockersha: {
-            cwd: "build",
-            command: "docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:<%=  gitinfo.local.branch.current.shortSHA %>"
-        },
-        deploydocker: {
-            cwd: "build",
-            command: "docker push docker.home.chrissearle.org:5000/fredagsmoro_cso:latest"
         }
     });
 
