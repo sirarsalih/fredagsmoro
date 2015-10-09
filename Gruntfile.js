@@ -94,8 +94,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask("newweek", ["gitpull:update", "exec:dropbox", "exec:data", "gitadd:newweek", "gitcommit:newweek", "gitpush"]);
 
-    grunt.registerTask("doit", ["newweek"]);
-
     grunt.registerTask("docker:package", ["gitinfo", "exec:dockersha", "exec:docker"]);
     grunt.registerTask("docker:deploy", ["gitinfo", "exec:deploydockersha", "exec:deploydocker"]);
 

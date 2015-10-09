@@ -24,9 +24,10 @@ Run:
 
 You will need
 
-* Correct filter to move the emails to a folder called Fredagsmoro accessible over IMAP
-* Copy scripts/config_sample.yml to scripts/config.yml and configure your email credentials
-* Correct ssh keys for keybased rsync over ssh deployment
+* To have the correct dropbox folder shared (for receiving new images)
+* Copy scripts/dropbox_sample.yml to scripts/dropbox.yml and set the fully specified path to the dropbox folder
+* For docker packaging - a running local docker daemon
+* For docker deployment - access to docker.home.chrissearle.org repository
 
 ### Grunt commands
 
@@ -34,16 +35,10 @@ You will need
 
 * grunt install - run both bower and npm install
 * grunt (or grunt eslint) - run eslint
-* grunt exec:serve - run a local web on port 8000
+* grunt serve - run a local web on port 5000
 
 #### For a new week
 
-* grunt newweek - fetch matching email, rebuild data.json, commit and push to github
-* grunt deploy - build and sync
-* grunt doit - newweek then deploy
-
-So - to generate a new week in its simplest form - add the images to the right content dir then run
-
-    grunt doit
-
-Sync of course requires that you have the correct ssh keys :)
+* grunt newweek - update from github, grab files from dropbox, rebuild data, push to github
+* grunt docker:package - package up in a docker container - creates both fredagsmoro_cso:<git tag> and moves fredagsmoro_cso:latest to point to it
+* grunt docker:deploy - push the packages from docker:package to docker.home.chrissearle.org repo
