@@ -1,6 +1,13 @@
 /* global angular */
 
-var app = angular.module("FDM", ["ngRoute" , "ui.bootstrap", "angulartics", "angulartics.google.analytics"]);
+var dependencies = ["ngRoute" , "ui.bootstrap"];
+
+if(typeof window.angulartics !== 'undefined') {
+    dependencies.push("angulartics");
+    dependencies.push("angulartics.google.analytics");
+}
+
+var app = angular.module("FDM", dependencies);
 
 app.config(["$routeProvider", function ($routeProvider) {
     "use strict";
