@@ -31,6 +31,20 @@
 
   <div class="container">
     <div class="row">
+      <div ng-hide="true" class="jumbotron">
+        <h1>Unable to load site</h1>
+
+        <p>This site only works if Google Analytics is enabled. I'm just trying to get some statistics in general over how
+          much the archives are used and whether there is much usage of slideshow view.<p>
+
+        <p>It will work if Google Analytics itself is blocked - but if you also block the file "lib/angulartics-google-analytics/dist/angulartics-google-analytics.min.js"
+           which is loaded from this site then this message will be displayed.</p>
+
+        <p>So - if you want to block Google Analytics - go ahead - but please don't block any files in the lib directory
+           or I can't even create the application for you.</p>
+
+        <p>Sorry about that :(</p>
+      </div>
       <div ng-view></div>
     </div>
 
