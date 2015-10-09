@@ -1,6 +1,13 @@
 /* global angular */
 
-var app = angular.module("FDM", ["ngRoute" , "ui.bootstrap"]);
+var dependencies = ["ngRoute" , "ui.bootstrap"];
+
+if(typeof window.angulartics !== 'undefined') {
+    dependencies.push("angulartics");
+    dependencies.push("angulartics.google.analytics");
+}
+
+var app = angular.module("FDM", dependencies);
 
 app.config(["$routeProvider", function ($routeProvider) {
     "use strict";
@@ -15,8 +22,3 @@ app.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "views/archive.html"
     }).otherwise({redirectTo: "/"});
 }]);
-
-
-ga(function() {
-    angular.module("FDMT", ["angulartics", "angulartics.google.analytics"]);
-});
