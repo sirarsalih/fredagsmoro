@@ -1,7 +1,8 @@
 /* globals angular moment */
 
 var app = angular.module("FDM");
-
+// Inside the controller below, you can check the dependencies array of app and based on that
+// show/hide the information div you've created in index.html 
 app.controller("AppController", ["dataFactory", function (dataFactory) {
     "use strict";
 
